@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = BB8::VERSION
   spec.authors       = ["Pat Allan"]
   spec.email         = ["pat@freelancing-gods.com"]
+  s.licenses         = ['MIT']
 
   spec.summary       = %q{Manage and share Terraform variables, environments, and states securely.}
   spec.homepage      = "https://github.com/pat/bb8"
