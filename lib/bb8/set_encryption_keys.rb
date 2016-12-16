@@ -6,17 +6,11 @@ class BB8::SetEncryptionKeys
   def call
     return if variables['BB8_SECRET_KEY']
 
-    cipher.encrypt
-
-    `voltos set BB8_SECRET_KEY=#{cipher.random_key}`
-    `voltos set BB8_SECRET_IV=#{cipher.random_iv}`
+    `voltos set BB8_SECRET_KEY=#{SecureRandom.hex(16)}`
+    `voltos set BB8_SECRET_IV=#{SecureRandom.hex(8)}`
   end
 
   private
-
-  def cipher
-    @cipher ||= OpenSSL::Cipher.new('aes-256-cbc')
-  end
 
   def variables
     @variables ||= BB8::VoltosVariables.call

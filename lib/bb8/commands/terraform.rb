@@ -17,7 +17,8 @@ class BB8::Commands::Terraform
     `cp ../common.tf common.tf` if File.exist?('../common.tf')
     Dir['*.enc'].each { |path| BB8::Decrypt.call path }
 
-    `terraform #{command} #{arguments.join(' ')}`
+    system "terraform #{command} #{arguments.join(' ')}"
+
     Dir['*.tfvars'].each         { |path| BB8::Encrypt.call path }
     Dir['*.tfstate'].each        { |path| BB8::Encrypt.call path }
     Dir['*.tfstate.backup'].each { |path| BB8::Encrypt.call path }
@@ -30,7 +31,7 @@ class BB8::Commands::Terraform
 
   private
 
-  attr_reader :arguments
+  attr_reader :environment, :command, :arguments
 
   def voltos_bundle
     @voltos_bundle ||= File.read('.bb8_bundle')

@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'json'
 require 'openssl'
+require 'securerandom'
 require 'voltos'
 
 module BB8
