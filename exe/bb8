@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# -*- mode: ruby -*-
+
+require 'bb8'
+
+BB8::CLI.call *ARGV
