@@ -1,9 +1,8 @@
-require 'curb'
+require 'faraday'
 require 'fileutils'
 require 'json'
 require 'openssl'
 require 'securerandom'
-require 'voltos'
 
 module BB8
   module Commands
@@ -20,5 +19,4 @@ require 'bb8/decrypt'
 require 'bb8/encrypt'
 require 'bb8/set_encryption_keys'
 require 'bb8/version'
-require 'bb8/voltos_api'
-require 'bb8/voltos_variables'
+require 'bb8/voltos'

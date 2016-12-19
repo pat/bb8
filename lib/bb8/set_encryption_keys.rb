@@ -4,15 +4,15 @@ class BB8::SetEncryptionKeys
   end
 
   def call
-    return if variables['BB8_SECRET_KEY']
+    return if bundle.variables['BB8_SECRET_KEY']
 
-    `voltos set BB8_SECRET_KEY=#{SecureRandom.hex(16)}`
-    `voltos set BB8_SECRET_IV=#{SecureRandom.hex(8)}`
+    bundle.set 'BB8_SECRET_KEY', SecureRandom.hex(16)
+    bundle.set 'BB8_SECRET_IV',  SecureRandom.hex(8)
   end
 
   private
 
-  def variables
-    @variables ||= BB8::VoltosVariables.call
+  def bundle
+    @bundle ||= BB8::Voltos.current_bundle
   end
 end

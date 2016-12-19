@@ -11,8 +11,8 @@ class BB8::Commands::InitialiseEnvironment
     FileUtils.mkdir_p name
     Dir.chdir name
 
-    api.create_bundle voltos_bundle unless bundles.include? voltos_bundle
-    `voltos use #{voltos_bundle}`   unless set_bundle?
+    BB8::Voltos::Bundle.create voltos_bundle unless bundle_exists?
+    append_token unless set_bundle?
     BB8::SetEncryptionKeys.call
 
     File.write '.bb8_bundle', voltos_bundle
@@ -22,12 +22,20 @@ class BB8::Commands::InitialiseEnvironment
 
   attr_reader :name, :voltos_bundle
 
-  def api
-    @api ||= BB8::VoltosAPI.new
+  def append_token
+    File.open('.env', 'a') do |file|
+      file.puts "VOLTOS_KEY=#{bundle.token}"
+    end
   end
 
-  def bundles
-    api.bundles.collect { |bundle| bundle['name'] }
+  def bundle
+    @bundle ||= BB8::Voltos.bundles.detect { |bundle|
+      bundle.name == voltos_bundle
+    } || BB8::Voltos::Bundle.create(voltos_bundle)
+  end
+
+  def bundle_exists?
+    BB8::Voltos.bundles.collect(&:name).include? voltos_bundle
   end
 
   def set_bundle?

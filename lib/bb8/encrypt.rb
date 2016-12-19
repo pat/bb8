@@ -9,8 +9,8 @@ class BB8::Encrypt
 
   def call
     cipher.encrypt
-    cipher.key = variables['BB8_SECRET_KEY']
-    cipher.iv  = variables['BB8_SECRET_IV']
+    cipher.key = bundle.variables['BB8_SECRET_KEY']
+    cipher.iv  = bundle.variables['BB8_SECRET_IV']
 
     buffer = ""
     File.open("#{path}.enc", "wb") do |output|
@@ -27,11 +27,11 @@ class BB8::Encrypt
 
   attr_reader :path
 
-  def cipher
-    @cipher ||= OpenSSL::Cipher.new('aes-256-cbc')
+  def bundle
+    @bundle ||= BB8::Voltos.current_bundle
   end
 
-  def variables
-    @variables ||= BB8::VoltosVariables.call
+  def cipher
+    @cipher ||= OpenSSL::Cipher.new('aes-256-cbc')
   end
 end
