@@ -20,7 +20,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |file| File.basename(file) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "voltos", "~> 0.3"
+  spec.add_runtime_dependency "curb",    "~> 0.9.3"
+  spec.add_runtime_dependency "voltos",  "~> 0.3"
 
   spec.add_development_dependency "rspec", "~> 3.0"
 end
