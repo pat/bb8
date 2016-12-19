@@ -32,8 +32,8 @@ class BB8::Voltos::API
 
   def connection
     @connection ||= Faraday.new(:url => DOMAIN) do |faraday|
-      faraday.adapter Faraday.default_adapter
       faraday.request :url_encoded
+      faraday.adapter Faraday.default_adapter
 
       faraday.headers['User-Agent']    = "BB8/#{BB8::VERSION}"
       faraday.headers['Authorization'] = "Token token=#{token}"
