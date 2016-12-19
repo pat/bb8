@@ -12,7 +12,6 @@ class BB8::Commands::InitialiseEnvironment
     Dir.chdir name
     File.write '.bb8_bundle', voltos_bundle
 
-    BB8::Voltos::Bundle.create voltos_bundle unless bundle_exists?
     append_token unless set_bundle?
     BB8::SetEncryptionKeys.call
   end
@@ -31,10 +30,6 @@ class BB8::Commands::InitialiseEnvironment
     @bundle ||= BB8::Voltos.bundles.detect { |bundle|
       bundle.name == voltos_bundle
     } || BB8::Voltos::Bundle.create(voltos_bundle)
-  end
-
-  def bundle_exists?
-    BB8::Voltos.bundles.collect(&:name).include? voltos_bundle
   end
 
   def set_bundle?
