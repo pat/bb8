@@ -11,7 +11,6 @@ module BB8
 end
 
 require 'bb8/cli'
-require 'bb8/commands/environment'
 require 'bb8/commands/help'
 require 'bb8/commands/initialise_environment'
 require 'bb8/commands/initialise_project'

@@ -22,9 +22,9 @@ Then move into your project's directory (i.e. `cd servers`). You'll want to add 
 
 The next step is to set up an environment:
 
-    $ bb8 staging init my-servers-staging
+    $ bb8 environment staging my-servers-staging
 
-The order of arguments is as follows: the name of the environment, the `init` command, and the name of a bundle of Voltos settings. BB-8 will create the latter for you, if you've not already done so.
+The arguments are the name of the environment (in this case, `staging`), and the name of a bundle of Voltos settings. BB-8 will create the latter for you, if you've not already done so.
 
 From this point on, you'll want to issue Terraform commands through BB-8 and a specified environment:
 
