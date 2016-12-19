@@ -10,12 +10,11 @@ class BB8::Commands::InitialiseEnvironment
   def call
     FileUtils.mkdir_p name
     Dir.chdir name
+    File.write '.bb8_bundle', voltos_bundle
 
     BB8::Voltos::Bundle.create voltos_bundle unless bundle_exists?
     append_token unless set_bundle?
     BB8::SetEncryptionKeys.call
-
-    File.write '.bb8_bundle', voltos_bundle
   end
 
   private
