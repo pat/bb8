@@ -1,6 +1,6 @@
 class BB8::Voltos
   def self.bundles
-    api = Voltos::API.new
+    api = BB8::Voltos::API.new
     api.get("bundles").collect { |hash|
       BB8::Voltos::Bundle.new hash['name'], api
     }
